@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="application" caption="msg://com.company.hr_crm/menu.application" insertBefore="administration">
+        <item screen="hrcrm_User.browse" caption="msg://com.company.hr_crm.screen.user/UserBrowse.caption"/>
+        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="hrcrm_Vacancy.browse" caption="msg://com.company.hr_crm.screen.vacancy/vacancyBrowse.menu"/>
+        <item screen="hrcrm_Candidate.browse" caption="msg://com.company.hr_crm.screen.candidate/candidateBrowse.menu"/>
+        <item screen="hrcrm_Request.browse" caption="msg://com.company.hr_crm.screen.request/requestBrowse.menu"/>
+        <item screen="hrcrm_Requirement.browse"
+              caption="msg://com.company.hr_crm.screen.requirement/requirementBrowse.menu"/>
+    </menu>
+
+</menu-config>
