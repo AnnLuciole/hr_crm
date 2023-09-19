@@ -6,14 +6,9 @@
     <data readOnly="true">
         <collection id="vacanciesDc"
                     class="com.company.hr_crm.entity.Vacancy">
-            <fetchPlan>
-                <property name="name"/>
-                <property name="description"/>
-                <property name="yearsOfExperience"/>
-                <property name="request"/>
-                <property name="requirements">
-                    <property name="name"/>
-                </property>
+            <fetchPlan extends="_base">
+                <property name="request" fetchPlan="_base"/>
+                <property name="requirements" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="vacanciesDl">
                 <query>

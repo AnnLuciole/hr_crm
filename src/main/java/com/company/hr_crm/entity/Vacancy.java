@@ -14,7 +14,6 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -37,17 +36,14 @@ public class Vacancy {
     private Request request;
 
     @InstanceName
-    @Column(name = "NAME", nullable = false)
-    @NotNull
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DESCRIPTION", nullable = false)
-    @NotNull
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "YEARS_OF_EXPERIENCE", nullable = false)
-    @NotNull
-    private String yearsOfExperience;
+    @Column(name = "YEARS_OF_EXPERIENCE")
+    private Integer yearsOfExperience;
 
     @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.UNLINK)
@@ -84,6 +80,14 @@ public class Vacancy {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public void setYearsOfExperience(Integer yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
+
+    public Integer getYearsOfExperience() {
+        return yearsOfExperience;
+    }
+
     public void setRequirements(List<Requirement> requirements) {
         this.requirements = requirements;
     }
@@ -98,14 +102,6 @@ public class Vacancy {
 
     public void setRequest(Request request) {
         this.request = request;
-    }
-
-    public String getYearsOfExperience() {
-        return yearsOfExperience;
-    }
-
-    public void setYearsOfExperience(String yearsOfExperience) {
-        this.yearsOfExperience = yearsOfExperience;
     }
 
     public String getDescription() {

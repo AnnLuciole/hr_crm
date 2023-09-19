@@ -8,6 +8,7 @@
                     class="com.company.hr_crm.entity.Candidate">
             <fetchPlan extends="_base">
                 <property name="desiredVacancy" fetchPlan="_base"/>
+                <property name="skills" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="candidatesDl">
                 <query>
@@ -52,6 +53,7 @@
                 <column id="email"/>
                 <column id="phoneNumber"/>
                 <column id="yearsOfExperience"/>
+                <column id="skills"/>
                 <column id="desiredVacancy"/>
             </columns>
             <simplePagination/>

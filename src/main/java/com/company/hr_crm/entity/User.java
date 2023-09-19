@@ -68,20 +68,20 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Transient
     protected Collection<? extends GrantedAuthority> authorities;
 
-    public String getPosition() {
-        return position;
+    public void setDepartment(Department department) {
+        this.department = department == null ? null : department.getId();
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public Department getDepartment() {
+        return department == null ? null : Department.fromId(department);
     }
 
-    public String getDepartment() {
-        return department;
+    public void setPosition(Position position) {
+        this.position = position == null ? null : position.getId();
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public Position getPosition() {
+        return position == null ? null : Position.fromId(position);
     }
 
     public UUID getId() {

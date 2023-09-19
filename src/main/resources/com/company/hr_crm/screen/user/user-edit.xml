@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
-        caption="msg://UserEdit.caption"
+        caption="msg://userEdit.caption"
         focusComponent="form">
     <data>
         <instance id="userDc"
@@ -36,6 +36,10 @@
                                caption="msg://confirmPassword"
                                required="true"
                                visible="false"/>
+                <comboBox id="departmentField" property="department"
+                          optionsEnum="com.company.hr_crm.entity.Department"/>
+                <comboBox id="positionField" property="position"
+                          optionsEnum="com.company.hr_crm.entity.Position"/>
                 <textField id="firstNameField" property="firstName"/>
                 <textField id="lastNameField" property="lastName"/>
                 <textField id="emailField" property="email"/>

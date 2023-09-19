@@ -22,7 +22,7 @@
             <column name="PHONE_NUMBER" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="YEARS_OF_EXPERIENCE" type="VARCHAR(255)">
+            <column name="YEARS_OF_EXPERIENCE" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="DESIRED_POSITION_ID" type="UUID">
@@ -86,15 +86,9 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_VACANCY"/>
             </column>
             <column name="REQUEST_ID" type="UUID"/>
-            <column name="NAME" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DESCRIPTION" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="YEARS_OF_EXPERIENCE" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="YEARS_OF_EXPERIENCE" type="INT"/>
             <column name="CREATED_BY" type="VARCHAR(255)"/>
             <column name="CREATED_DATE" type="DATETIME"/>
             <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>

@@ -34,8 +34,8 @@ public class Candidate {
     @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.UNLINK)
     @JoinTable(name = "HRCRM_CANDIDATE_REQUIREMENT_LINK",
-            joinColumns = @JoinColumn(name = "CANDIDATE_ID"),
-            inverseJoinColumns = @JoinColumn(name = "REQUIREMENT_ID"))
+            joinColumns = @JoinColumn(name = "CANDIDATE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "REQUIREMENT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private List<Requirement> skills;
 
@@ -56,9 +56,9 @@ public class Candidate {
     @NotNull
     private String phoneNumber;
 
-    @Column(name = "YEARS_OF_EXPERIENCE", nullable = false)
     @NotNull
-    private String yearsOfExperience;
+    @Column(name = "YEARS_OF_EXPERIENCE", nullable = false)
+    private Integer yearsOfExperience;
 
     @JoinColumn(name = "DESIRED_POSITION_ID", nullable = false)
     @NotNull
@@ -98,6 +98,14 @@ public class Candidate {
     @ManyToOne(fetch = FetchType.LAZY)
     private Request request;
 
+    public void setYearsOfExperience(Integer yearsOfExperience) {
+        this.yearsOfExperience = yearsOfExperience;
+    }
+
+    public Integer getYearsOfExperience() {
+        return yearsOfExperience;
+    }
+
     public void setSkills(List<Requirement> skills) {
         this.skills = skills;
     }
@@ -120,14 +128,6 @@ public class Candidate {
 
     public Vacancy getDesiredVacancy() {
         return desiredVacancy;
-    }
-
-    public String getYearsOfExperience() {
-        return yearsOfExperience;
-    }
-
-    public void setYearsOfExperience(String yearsOfExperience) {
-        this.yearsOfExperience = yearsOfExperience;
     }
 
     public String getPhoneNumber() {

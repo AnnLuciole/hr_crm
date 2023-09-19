@@ -7,9 +7,19 @@
                   class="com.company.hr_crm.entity.Candidate">
             <fetchPlan extends="_base">
                 <property name="desiredVacancy" fetchPlan="_base"/>
+                <property name="skills" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
         </instance>
+        <collection id="skillsDc"
+                    class="com.company.hr_crm.entity.Requirement"
+                    fetchPlan="_local">
+            <loader id="skillsLoader">
+                <query>
+                    <![CDATA[select e from hrcrm_Requirement e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -41,6 +51,10 @@
                             <action id="entityClear" type="entity_clear"/>
                         </actions>
                     </entityPicker>
+                    <multiSelectList id="skillsField"
+                                     property="skills"
+                                     optionsContainer="skillsDc"
+                                     width="350px"/>
                 </column>
             </form>
         </scrollBox>
