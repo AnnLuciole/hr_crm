@@ -18,6 +18,13 @@ import javax.annotation.Nonnull;
 @ResourceRole(name = "HR_Junior", code = "h-r_-junior", scope = "UI")
 public interface HRJuniorRole {
 
+    @ScreenPolicy(screenIds = "hrcrm_LoginScreen")
+    void login();
+
+    @ScreenPolicy(screenIds = "hrcrm_MainScreen")
+    @MenuPolicy(menuIds = "hrcrm_MainScreen")
+    void main();
+
     @EntityPolicy(
             entityClass = Requirement.class,
             actions = {EntityPolicyAction.READ,

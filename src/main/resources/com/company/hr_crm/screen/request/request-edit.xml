@@ -29,13 +29,14 @@
                 width="800"/>
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="requestDc">
-            <column width="350px">
+            <column>
                 <entityPicker id="positionField" property="vacancy">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
+                <comboBox id="candidatesField" property="candidates"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

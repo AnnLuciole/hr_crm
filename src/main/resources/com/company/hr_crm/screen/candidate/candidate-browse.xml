@@ -7,7 +7,6 @@
         <collection id="candidatesDc"
                     class="com.company.hr_crm.entity.Candidate">
             <fetchPlan extends="_base">
-                <property name="desiredVacancy" fetchPlan="_base"/>
                 <property name="skills" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="candidatesDl">
@@ -38,7 +37,7 @@
                 dataLoader="candidatesDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="candidatesTable"
+        <table id="candidatesTable"
                     width="100%"
                     dataContainer="candidatesDc">
             <actions>
@@ -54,7 +53,6 @@
                 <column id="phoneNumber"/>
                 <column id="yearsOfExperience"/>
                 <column id="skills"/>
-                <column id="desiredVacancy"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
@@ -64,7 +62,7 @@
                 <button id="editBtn" action="candidatesTable.edit"/>
                 <button id="removeBtn" action="candidatesTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

@@ -34,7 +34,7 @@
         <filter id="filter" dataLoader="usersDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="usersTable"
+        <table id="usersTable"
                     width="100%"
                     dataContainer="usersDc"
                     multiselect="true">
@@ -72,7 +72,7 @@
                     </actions>
                 </popupButton>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

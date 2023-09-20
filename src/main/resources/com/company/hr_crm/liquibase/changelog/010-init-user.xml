@@ -19,6 +19,12 @@
             <column name="USERNAME" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="DEPARTMENT" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="POSITION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="FIRST_NAME" type="varchar(255)"/>
             <column name="LAST_NAME" type="varchar(255)"/>
             <column name="PASSWORD" type="varchar(255)"/>
@@ -41,6 +47,8 @@
         <insert tableName="HRCRM_USER" dbms="postgresql, mssql, hsqldb">
             <column name="ID" value="60885987-1b61-4247-94c7-dff348347f93"/>
             <column name="VERSION" value="1"/>
+            <column name="DEPARTMENT" value="It"/>
+            <column name="POSITION" value="administrator"/>
             <column name="USERNAME" value="admin"/>
             <column name="PASSWORD" value="{noop}admin"/>
             <column name="ACTIVE" valueBoolean="true"/>
@@ -49,6 +57,8 @@
         <insert tableName="HRCRM_USER" dbms="oracle, mysql, mariadb">
             <column name="ID" value="608859871b61424794c7dff348347f93"/>
             <column name="VERSION" value="1"/>
+            <column name="DEPARTMENT" value="It"/>
+            <column name="POSITION" value="administrator"/>
             <column name="USERNAME" value="admin"/>
             <column name="PASSWORD" value="{noop}admin"/>
             <column name="ACTIVE" valueBoolean="true"/>

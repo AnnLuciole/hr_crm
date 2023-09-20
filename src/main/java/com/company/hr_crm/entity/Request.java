@@ -28,11 +28,6 @@ public class Request {
     @Id
     private UUID id;
 
-    @OnDeleteInverse(DeletePolicy.UNLINK)
-    @OnDelete(DeletePolicy.UNLINK)
-    @OneToMany(mappedBy = "request")
-    private List<Candidate> candidates;
-
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;
@@ -65,20 +60,28 @@ public class Request {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "request")
     private Vacancy vacancy;
 
-    public Vacancy getVacancy() {
-        return vacancy;
-    }
+    @OnDeleteInverse(DeletePolicy.UNLINK)
+    @OnDelete(DeletePolicy.UNLINK)
+    @JoinTable(name = "HRCRM_CANDIDATE_REQUEST_LINK",
+            joinColumns = @JoinColumn(name = "REQUEST_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "CANDIDATE_ID", referencedColumnName = "ID"))
+    @ManyToMany
+    private List<Candidate> candidates;
 
-    public void setVacancy(Vacancy vacancy) {
-        this.vacancy = vacancy;
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates = candidates;
     }
 
     public List<Candidate> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(List<Candidate> candidates) {
-        this.candidates = candidates;
+    public Vacancy getVacancy() {
+        return vacancy;
+    }
+
+    public void setVacancy(Vacancy vacancy) {
+        this.vacancy = vacancy;
     }
 
     public Date getDeletedDate() {

@@ -38,7 +38,7 @@
                 dataLoader="requestsDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="requestsTable"
+        <table id="requestsTable"
                     width="100%"
                     dataContainer="requestsDc">
             <actions>
@@ -50,6 +50,7 @@
             <columns>
                 <column id="id"/>
                 <column id="vacancy"/>
+                <column id="candidates"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
@@ -59,7 +60,7 @@
                 <button id="editBtn" action="requestsTable.edit"/>
                 <button id="removeBtn" action="requestsTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

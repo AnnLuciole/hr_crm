@@ -20,10 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "HRCRM_CANDIDATE", indexes = {
-        @Index(name = "IDX_HRCRMCANDIDA_DESIREDPOSIT", columnList = "DESIRED_POSITION_ID"),
-        @Index(name = "IDX_HRCRM_CANDIDATE_REQUEST", columnList = "REQUEST_ID")
-})
+@Table(name = "HRCRM_CANDIDATE")
 @Entity(name = "hrcrm_Candidate")
 public class Candidate {
     @JmixGeneratedValue
@@ -60,11 +57,6 @@ public class Candidate {
     @Column(name = "YEARS_OF_EXPERIENCE", nullable = false)
     private Integer yearsOfExperience;
 
-    @JoinColumn(name = "DESIRED_POSITION_ID", nullable = false)
-    @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    private Vacancy desiredVacancy;
-
     @CreatedBy
     @Column(name = "CREATED_BY")
     private String createdBy;
@@ -92,11 +84,21 @@ public class Candidate {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    @JoinTable(name = "HRCRM_CANDIDATE_REQUEST_LINK",
+            joinColumns = @JoinColumn(name = "CANDIDATE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "REQUEST_ID", referencedColumnName = "ID"))
+    @ManyToMany
     @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.UNLINK)
-    @JoinColumn(name = "REQUEST_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Request request;
+    private List<Request> request;
+
+    public void setRequest(List<Request> request) {
+        this.request = request;
+    }
+
+    public List<Request> getRequest() {
+        return request;
+    }
 
     public void setYearsOfExperience(Integer yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
@@ -112,22 +114,6 @@ public class Candidate {
 
     public List<Requirement> getSkills() {
         return skills;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-
-    public void setDesiredVacancy(Vacancy desiredPosition) {
-        this.desiredVacancy = desiredPosition;
-    }
-
-    public Vacancy getDesiredVacancy() {
-        return desiredVacancy;
     }
 
     public String getPhoneNumber() {

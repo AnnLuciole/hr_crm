@@ -8,12 +8,7 @@ import io.jmix.security.role.annotation.ResourceRole;
 import io.jmix.security.role.annotation.SpecificPolicy;
 import io.jmix.securityui.role.annotation.MenuPolicy;
 import io.jmix.securityui.role.annotation.ScreenPolicy;
-import org.checkerframework.common.aliasing.qual.Unique;
 
-import javax.annotation.Nonnull;
-
-@Nonnull
-@Unique
 @ResourceRole(name = "Administrator", code = "administrator")
 public interface AdministratorRole {
 

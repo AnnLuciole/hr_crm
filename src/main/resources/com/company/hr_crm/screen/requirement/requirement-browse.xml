@@ -35,7 +35,7 @@
                 dataLoader="requirementsDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="requirementsTable"
+        <table id="requirementsTable"
                     width="100%"
                     dataContainer="requirementsDc">
             <actions>
@@ -56,7 +56,7 @@
                 <button id="editBtn" action="requirementsTable.edit"/>
                 <button id="removeBtn" action="requirementsTable.remove"/>
             </buttonsPanel>
-        </groupTable>
+        </table>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>

@@ -25,19 +25,25 @@
             <column name="YEARS_OF_EXPERIENCE" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="DESIRED_POSITION_ID" type="UUID">
-                <constraints nullable="false"/>
-            </column>
             <column name="CREATED_BY" type="VARCHAR(255)"/>
             <column name="CREATED_DATE" type="DATETIME"/>
             <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
             <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
             <column name="DELETED_BY" type="VARCHAR(255)"/>
             <column name="DELETED_DATE" type="DATETIME"/>
-            <column name="REQUEST_ID" type="UUID"/>
         </createTable>
     </changeSet>
     <changeSet id="2" author="hrcrm">
+        <createTable tableName="HRCRM_CANDIDATE_REQUEST_LINK">
+            <column name="CANDIDATE_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_CANDIDATE_REQUEST_LINK"/>
+            </column>
+            <column name="REQUEST_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_CANDIDATE_REQUEST_LINK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="hrcrm">
         <createTable tableName="HRCRM_CANDIDATE_REQUIREMENT_LINK">
             <column name="CANDIDATE_ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_CANDIDATE_REQUIREMENT_LINK"/>
@@ -47,7 +53,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="3" author="hrcrm">
+    <changeSet id="4" author="hrcrm">
         <createTable tableName="HRCRM_REQUEST">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_REQUEST"/>
@@ -60,7 +66,7 @@
             <column name="DELETED_DATE" type="DATETIME"/>
         </createTable>
     </changeSet>
-    <changeSet id="4" author="hrcrm">
+    <changeSet id="5" author="hrcrm">
         <createTable tableName="HRCRM_REQUIREMENT">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_REQUIREMENT"/>
@@ -80,7 +86,7 @@
             <column name="CANDIDATE_ID" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="5" author="hrcrm">
+    <changeSet id="6" author="hrcrm">
         <createTable tableName="HRCRM_VACANCY">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_VACANCY"/>
@@ -97,7 +103,7 @@
             <column name="DELETED_DATE" type="DATETIME"/>
         </createTable>
     </changeSet>
-    <changeSet id="6" author="hrcrm">
+    <changeSet id="7" author="hrcrm">
         <createTable tableName="HRCRM_VACANCY_REQUIREMENT_LINK">
             <column name="REQUIREMENT_ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_HRCRM_VACANCY_REQUIREMENT_LINK"/>
@@ -107,30 +113,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="7" author="hrcrm">
-        <addColumn tableName="HRCRM_USER">
-            <column name="DEPARTMENT" type="VARCHAR(255)"/>
-        </addColumn>
-
-        <addNotNullConstraint columnName="DEPARTMENT" defaultNullValue="''" tableName="HRCRM_USER"/>
-    </changeSet>
     <changeSet id="8" author="hrcrm">
-        <addColumn tableName="HRCRM_USER">
-            <column name="POSITION_" type="VARCHAR(255)"/>
-        </addColumn>
-
-        <addNotNullConstraint columnName="POSITION_" defaultNullValue="''" tableName="HRCRM_USER"/>
-    </changeSet>
-    <changeSet id="9" author="hrcrm">
-        <createIndex indexName="IDX_HRCRMCANDIDA_DESIREDPOSIT" tableName="HRCRM_CANDIDATE">
-            <column name="DESIRED_POSITION_ID"/>
-        </createIndex>
-
-        <addForeignKeyConstraint baseColumnNames="DESIRED_POSITION_ID" baseTableName="HRCRM_CANDIDATE"
-                                 constraintName="FK_HRCRM_CANDIDATE_ON_DESIRED_POSITION" referencedColumnNames="ID"
-                                 referencedTableName="HRCRM_VACANCY"/>
-    </changeSet>
-    <changeSet id="10" author="hrcrm">
         <createIndex indexName="IDX_HRCRMREQUIREMENT_CANDIDATE" tableName="HRCRM_REQUIREMENT">
             <column name="CANDIDATE_ID"/>
         </createIndex>
@@ -139,16 +122,7 @@
                                  constraintName="FK_HRCRM_REQUIREMENT_ON_CANDIDATE" referencedColumnNames="ID"
                                  referencedTableName="HRCRM_CANDIDATE"/>
     </changeSet>
-    <changeSet id="11" author="hrcrm">
-        <createIndex indexName="IDX_HRCRM_CANDIDATE_REQUEST" tableName="HRCRM_CANDIDATE">
-            <column name="REQUEST_ID"/>
-        </createIndex>
-
-        <addForeignKeyConstraint baseColumnNames="REQUEST_ID" baseTableName="HRCRM_CANDIDATE"
-                                 constraintName="FK_HRCRM_CANDIDATE_ON_REQUEST" referencedColumnNames="ID"
-                                 referencedTableName="HRCRM_REQUEST"/>
-    </changeSet>
-    <changeSet id="12" author="hrcrm">
+    <changeSet id="9" author="hrcrm">
         <createIndex indexName="IDX_HRCRM_VACANCY_REQUEST" tableName="HRCRM_VACANCY">
             <column name="REQUEST_ID"/>
         </createIndex>
@@ -157,22 +131,32 @@
                                  constraintName="FK_HRCRM_VACANCY_ON_REQUEST" referencedColumnNames="ID"
                                  referencedTableName="HRCRM_REQUEST"/>
     </changeSet>
-    <changeSet id="13" author="hrcrm">
-        <addForeignKeyConstraint baseColumnNames="CANDIDATE_ID" baseTableName="HRCRM_CANDIDATE_REQUIREMENT_LINK"
+    <changeSet id="10" author="hrcrm">
+        <addForeignKeyConstraint baseColumnNames="CANDIDATE_ID" baseTableName="HRCRM_CANDIDATE_REQUEST_LINK"
                                  constraintName="FK_HRCCANREQ_ON_CANDIDATE" referencedColumnNames="ID"
                                  referencedTableName="HRCRM_CANDIDATE"/>
     </changeSet>
-    <changeSet id="14" author="hrcrm">
+    <changeSet id="11" author="hrcrm">
+        <addForeignKeyConstraint baseColumnNames="CANDIDATE_ID" baseTableName="HRCRM_CANDIDATE_REQUIREMENT_LINK"
+                                 constraintName="FK_HRCCANREQ_ON_CANDIDATE_K7dr2A" referencedColumnNames="ID"
+                                 referencedTableName="HRCRM_CANDIDATE"/>
+    </changeSet>
+    <changeSet id="12" author="hrcrm">
+        <addForeignKeyConstraint baseColumnNames="REQUEST_ID" baseTableName="HRCRM_CANDIDATE_REQUEST_LINK"
+                                 constraintName="FK_HRCCANREQ_ON_REQUEST" referencedColumnNames="ID"
+                                 referencedTableName="HRCRM_REQUEST"/>
+    </changeSet>
+    <changeSet id="13" author="hrcrm">
         <addForeignKeyConstraint baseColumnNames="REQUIREMENT_ID" baseTableName="HRCRM_CANDIDATE_REQUIREMENT_LINK"
                                  constraintName="FK_HRCCANREQ_ON_REQUIREMENT" referencedColumnNames="ID"
                                  referencedTableName="HRCRM_REQUIREMENT"/>
     </changeSet>
-    <changeSet id="15" author="hrcrm">
+    <changeSet id="14" author="hrcrm">
         <addForeignKeyConstraint baseColumnNames="REQUIREMENT_ID" baseTableName="HRCRM_VACANCY_REQUIREMENT_LINK"
                                  constraintName="FK_HRCVACREQ_ON_REQUIREMENT" referencedColumnNames="ID"
                                  referencedTableName="HRCRM_REQUIREMENT"/>
     </changeSet>
-    <changeSet id="16" author="hrcrm">
+    <changeSet id="15" author="hrcrm">
         <addForeignKeyConstraint baseColumnNames="VACANCY_ID" baseTableName="HRCRM_VACANCY_REQUIREMENT_LINK"
                                  constraintName="FK_HRCVACREQ_ON_VACANCY" referencedColumnNames="ID"
                                  referencedTableName="HRCRM_VACANCY"/>

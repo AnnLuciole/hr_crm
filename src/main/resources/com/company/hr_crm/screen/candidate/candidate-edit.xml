@@ -6,7 +6,6 @@
         <instance id="candidateDc"
                   class="com.company.hr_crm.entity.Candidate">
             <fetchPlan extends="_base">
-                <property name="desiredVacancy" fetchPlan="_base"/>
                 <property name="skills" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
@@ -45,12 +44,6 @@
                     <textField id="emailField" property="email"/>
                     <textField id="phoneNumberField" property="phoneNumber"/>
                     <textField id="yearsOfExperienceField" property="yearsOfExperience"/>
-                    <entityPicker id="desiredPositionField" property="desiredVacancy">
-                        <actions>
-                            <action id="entityLookup" type="entity_lookup"/>
-                            <action id="entityClear" type="entity_clear"/>
-                        </actions>
-                    </entityPicker>
                     <multiSelectList id="skillsField"
                                      property="skills"
                                      optionsContainer="skillsDc"

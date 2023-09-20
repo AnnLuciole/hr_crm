@@ -33,7 +33,7 @@ public class User implements JmixUserDetails, HasTimeZone {
     @NotNull
     private String department;
 
-    @Column(name = "POSITION_", nullable = false)
+    @Column(name = "POSITION", nullable = false)
     @NotNull
     private String position;
 
