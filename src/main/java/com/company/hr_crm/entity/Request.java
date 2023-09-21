@@ -62,10 +62,7 @@ public class Request {
 
     @OnDeleteInverse(DeletePolicy.UNLINK)
     @OnDelete(DeletePolicy.UNLINK)
-    @JoinTable(name = "HRCRM_CANDIDATE_REQUEST_LINK",
-            joinColumns = @JoinColumn(name = "REQUEST_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "CANDIDATE_ID", referencedColumnName = "ID"))
-    @ManyToMany
+    @ManyToMany(mappedBy = "request")
     private List<Candidate> candidates;
 
     public void setCandidates(List<Candidate> candidates) {

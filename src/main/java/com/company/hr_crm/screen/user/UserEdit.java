@@ -1,6 +1,7 @@
 package com.company.hr_crm.screen.user;
 
 import com.company.hr_crm.entity.User;
+import io.jmix.core.DataManager;
 import io.jmix.core.EntityStates;
 import io.jmix.core.security.event.SingleUserPasswordChangeEvent;
 import io.jmix.ui.Notifications;
@@ -11,6 +12,7 @@ import io.jmix.ui.model.DataContext;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
@@ -47,6 +49,8 @@ public class UserEdit extends StandardEditor<User> {
     @Autowired
     private ComboBox<String> timeZoneField;
 
+    @Autowired
+    private DataManager dataManager;
     private boolean isNewEntity;
 
     @Subscribe
@@ -71,6 +75,14 @@ public class UserEdit extends StandardEditor<User> {
 
     @Subscribe
     protected void onBeforeCommit(BeforeCommitChangesEvent event) {
+        if (getEditedEntity().getPosition().getId().equals("administrator")) {
+            if (!isFirstAdministratorRoleInDataBase()) {
+                notifications.create(Notifications.NotificationType.WARNING)
+                        .withCaption(messageBundle.getMessage("userWithAdministratorRoleAlreadyExist"))
+                        .show();
+                event.preventCommit();
+            }
+        }
         if (entityStates.isNew(getEditedEntity())) {
             if (!Objects.equals(passwordField.getValue(), confirmPasswordField.getValue())) {
                 notifications.create(Notifications.NotificationType.WARNING)
@@ -87,5 +99,11 @@ public class UserEdit extends StandardEditor<User> {
         if (isNewEntity) {
             getApplicationContext().publishEvent(new SingleUserPasswordChangeEvent(getEditedEntity().getUsername(), passwordField.getValue()));
         }
+    }
+
+    private boolean isFirstAdministratorRoleInDataBase() {
+        User user = dataManager.load(User.class).query("select u from hrcrm_User u where u.position like :position")
+                .parameter("position", "administrator").one();
+        return user.getId().toString().isEmpty();
     }
 }

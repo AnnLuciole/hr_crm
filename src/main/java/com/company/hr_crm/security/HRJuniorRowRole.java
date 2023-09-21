@@ -18,12 +18,7 @@ import javax.annotation.Nonnull;
 public interface HRJuniorRowRole {
 
     @JpqlRowLevelPolicy(
-            entityClass = Requirement.class,
-            where = "{E}.createdBy = :current_user_username")
-    void requirement();
-
-    @JpqlRowLevelPolicy(
-            entityClass = Requirement.class,
+            entityClass = Vacancy.class,
             where = "{E}.createdBy = :current_user_username")
     void vacancy();
 }
